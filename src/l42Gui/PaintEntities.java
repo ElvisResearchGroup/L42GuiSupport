@@ -34,12 +34,13 @@ public class PaintEntities extends PaintablePanel{
     }
   public Entity parse1(String s){
     var ss=s.split(";");
-    if(ss.length!=5){throw new Error("Invalid format for "+s);}
+    if(ss.length<5){throw new Error("Invalid format for "+s);}
     var x=Integer.parseInt(ss[0]);
     var y=Integer.parseInt(ss[1]);
     var r=Integer.parseInt(ss[2]);
     var rot=Double.parseDouble(ss[3]);
-    return new Entity(x,y,r,rot,ss[4].trim());
+    var len=4+ss[0].length()+ss[1].length()+ss[2].length()+ss[3].length();
+    return new Entity(x,y,r,rot,s.substring(len).trim());
     }
   private static HashMap<String,BufferedImage>imgs=new HashMap<>();
   public static BufferedImage img(String s){
