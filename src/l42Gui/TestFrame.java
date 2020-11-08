@@ -1,9 +1,6 @@
 package l42Gui;
 
-import java.awt.event.KeyListener;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -142,7 +139,7 @@ public class TestFrame {
       JLabel label1=new JLabel("yo!");
       JLabel label2=new JLabel("west");
       PaintEntities e=new PaintEntities(){
-        @Override protected void paint(Graphics2D g){
+        @Override public void paint(Graphics2D g){
           super.paint(g);
           //var font = new java.awt.Font("Serif", java.awt.Font.PLAIN, 12);          
           //g.setFont(font);         

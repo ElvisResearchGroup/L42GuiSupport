@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
 public class PaintEntities extends PaintablePanel{
   public record Entity(int x, int y, int radius, double rotation,String imgUrl){}
   private LinkedHashMap<String,List<Entity>> entities=new LinkedHashMap<>();
-  @Override protected void paint(Graphics2D g){
+  @Override public void paint(Graphics2D g){
     for(var es:entities.values()){for(var e:es){draw(g,e);}}
     }
   public void draw(Graphics2D g,Entity e){
