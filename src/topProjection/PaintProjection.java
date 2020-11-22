@@ -34,6 +34,8 @@ public class PaintProjection extends PaintablePanel{
   public List<Drawable> parseColumn(String col){
     var res=new ArrayList<Drawable>();
     for(var s:col.split(";")){
+      s=s.trim();
+      if(s.isEmpty()){continue;}
       var d=names.get(s);
       if(d==null){throw new Error("Invalid drawable name:"+s);}
       res.add(d);

@@ -17,7 +17,7 @@ public class Main {
       var v=View.of(new Camera(37,37,40),300,300,52,100,450d);
       @SuppressWarnings("serial")
       var mapView=new JComponent(){
-        {setDoubleBuffered(true);}
+        {setDoubleBuffered(false);}
         @Override public Dimension getPreferredSize(){return new Dimension(800,800);}
         @Override public void paintComponent(Graphics g){
           var g2d=(Graphics2D)g;

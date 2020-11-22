@@ -11,7 +11,7 @@ public record View(
   int maxZ,
   List<Drawable>[] items,
   int vpSide,
-  int vpMaxZ,
+  //int vpMaxZ,
   int[] vpPoints,
   int vpHalf,
   double scale
@@ -24,7 +24,7 @@ public record View(
     @SuppressWarnings("unchecked")
     List<Drawable>[] items=Stream.generate(()->new ArrayList<Drawable>())
       .limit(side*side).toArray(List[]::new);
-    return new View(camera,side,maxZ,items,vpSide,vpMaxZ,vpPoints,vpSide/2,scale);
+    return new View(camera,side,maxZ,items,vpSide,vpPoints,vpSide/2,scale);
     }
   public Drawable vpGet(int x, int y, int z){
     return get(x+((int)camera.x)-vpHalf,y+((int)camera.y)-vpHalf,z);
@@ -52,16 +52,17 @@ public record View(
   public int coordPs(int x,int y,int z){
     assert x>=0 && y>=0 && z>=0;
     var s1=vpSide+1;
-    assert x<s1 && z<vpMaxZ+1;
+    assert x<s1 && z<maxZ+1;
     return x+y*s1+z*s1*s1;
     }
   public int coordDs(int x,int y,int z){
     assert x>=0 && y>=0 && z>=0;
-    assert x<vpSide && y<vpSide && z<vpMaxZ;
+    assert x<vpSide && y<vpSide && z<maxZ;
     return x+y*vpSide+z*vpSide*vpSide;
     }
   public Drawable get(int x, int y, int z) {
     if(x<0 || y<0){return Drawable.air;}
+    if(x>=side || y>=side){return Drawable.air;}
     assert x>=0 && y>=0 && side>=0: x+" "+y+" "+side;
     var lz=items[x+y*side];
     if(lz.size()<=z) {return Drawable.air;}
@@ -78,7 +79,7 @@ public record View(
     }
   public void visitQuadrants(Graphics2D g){
     assert (vpSide-1)%2!=0;
-    for(int z = 0; z < vpMaxZ; z+=1){drawQuadrantsLevel(g,z);}
+    for(int z = 0; z < maxZ; z+=1){drawQuadrantsLevel(g,z);}//TODO: was vpMaxZ
     }
   private void drawQuadrantsLevel(Graphics2D g,int z) {
     int max=(vpSide-1)/2;
@@ -109,8 +110,8 @@ public record View(
     int offX=(int)camera.x;
     int offY=(int)camera.y;
     double extraX=camera.x-offX;
-    double extraY=camera.y-offY;
-    for(int z=0;z<vpMaxZ+1;z++) for(int x=0;x<vpSide;x++)for(int y=0;y<vpSide;y++)
+    double extraY=camera.y-offY;//TODO: below was vpMaxZ
+    for(int z=0;z<maxZ+1;z++) for(int x=0;x<vpSide;x++)for(int y=0;y<vpSide;y++)
       cachePoint(dim,x, y, z, x+1d-extraX, y+1d-extraY,z*scaleZ);
     }
   }
