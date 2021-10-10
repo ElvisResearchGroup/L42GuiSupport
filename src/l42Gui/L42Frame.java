@@ -19,14 +19,14 @@ import is.L42.platformSpecific.javaEvents.Event;
 public class L42Frame extends JFrame{
   public final Event event;
   public L42Frame(Event event,String name, int x, int y){
-    setTitle(name);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(x,y);
-    setVisible(true);
     this.event=event;
     event.registerEvent("Kill",(k,id,msg)->
       dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING))
       );
+    setTitle(name);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setSize(x,y);
+    setVisible(true);
     }
   public void addEast(JComponent c,JComponent that){addPlace(c,that,BorderLayout.EAST);}
   public void addWest(JComponent c,JComponent that){addPlace(c,that,BorderLayout.WEST);}
