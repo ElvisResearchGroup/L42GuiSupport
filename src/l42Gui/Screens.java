@@ -14,7 +14,7 @@ public class Screens{
   private final HashMap<String,Function<String,JComponent>>map=new HashMap<>();
   public Screens(JFrame top, Event event, String key){
     this.top=top;
-    event.registerEvent(key,(k,id,msg)->action(id,msg));
+    event.registerEvent(key,(id,msg)->action(id,msg));
     }
   public Screens register(String id,Function<String,JComponent>action){
     map.put(id,action);

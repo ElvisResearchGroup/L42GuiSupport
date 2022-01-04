@@ -20,7 +20,7 @@ public class L42Frame extends JFrame{
   public final Event event;
   public L42Frame(Event event,String name, int x, int y){
     this.event=event;
-    event.registerEvent("Kill",(k,id,msg)->
+    event.registerEvent("Kill",(id,msg)->
       dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING))
       );
     setTitle(name);

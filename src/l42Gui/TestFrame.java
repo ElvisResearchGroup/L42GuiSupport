@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import is.L42.platformSpecific.javaEvents.Event;
+import is.L42.platformSpecific.javaEvents.ConcreteEvent;
 
 public class TestFrame {
 /*  static boolean basic(char ch){
@@ -124,10 +125,10 @@ public class TestFrame {
     }*/
   @SuppressWarnings("serial")
   public static void main(String[]a){
-    Event.test_only_initialize();
+    ConcreteEvent.test_only_initialize();
     var g="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png";
     @SuppressWarnings("unused")
-    var f=L42Frame.openAndPings(100,30,()->new L42Frame(Event.instance(),"Foo",100,200){
+    var f=L42Frame.openAndPings(100,30,()->new L42Frame(ConcreteEvent.instance(),"Foo",100,200){
       int posX=20;
       int posY=70;
       @Override public void ping(){
@@ -147,10 +148,10 @@ public class TestFrame {
           }
         };
       JPanel p=new JPanel();
-      { Event.initialize(); 
+      { ConcreteEvent.initialize(); 
         p.setFocusable(true);
         p.requestFocusInWindow();
-        p.addKeyListener(new BindKeys(Event.instance(),"","cPressd","cReleased","cTyped"));
+        p.addKeyListener(new BindKeys(ConcreteEvent.instance(),"","cPressd","cReleased","cTyped"));
         /*p.addKeyListener(new KeyListener(){
           public void keyTyped(KeyEvent e){System.out.println("TYPED ["+eventToS(e)+"]"+e.getKeyLocation());}
           public void keyPressed(KeyEvent e){System.out.println("PRESSED ["+eventToS(e)+"]"+e.getKeyLocation());}
